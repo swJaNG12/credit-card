@@ -20,6 +20,45 @@ swJaNG12
 - TypeScript
 - React
 - Firebase(Firestore, Firebase Auth)
+- emotion
+
+# Styles
+
+## emotion(CSS-in-JS)
+
+예시코드
+
+```jsx
+// 아래 코드에서 width, height는 지정 X
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
+
+// css Prop(String Styles)
+const containerStyle = css`
+  background-color: blue;
+`
+
+// Styled Components
+const Button = styled.button`
+  background-color: red;
+  color: #fff;
+`
+
+// Composition
+const base = css`
+  ${containerStyle}
+  color: yellow;
+`
+
+function Example() {
+	return (
+		<div css={containerStyle}>
+			<Button>lorem</Button>
+			<p css={base}>lorem ipsum<p/>
+		</div>
+	)
+}
+```
 
 # Commit Emoji
 
