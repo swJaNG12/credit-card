@@ -2,15 +2,18 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import './App.css'
 
+// css Prop(String Styles)
 const containerStyle = css`
   background-color: blue;
 `
 
+// Styled Components
 const Button = styled.button`
   background-color: red;
   color: #fff;
 `
 
+// Composition
 const base = css`
   ${containerStyle}
   color: yellow;
