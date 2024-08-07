@@ -1,46 +1,195 @@
-# Getting Started with Create React App
+# Contributor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+swJaNG12
 
-## Available Scripts
+# Project Configuration
 
-In the project directory, you can run:
+- CRACO(CRA Configuration Override): craco.config.js, 경로 alias 설정
+  - plugin: craco-alias
+- tsconfig.json, tsconfig.paths.json: TypeScript 설정
+- eslint: eslint.config.mjs
+  - plugins: eslint-plugin-prettier, eslint-plugin-react
+  - parser: @typescript-eslint/parser
+- prettier: .prettierrc
+- Package Manager: yarn 4.3.1
+- Database: Cloud Firestore
+- Authentication: Firebase Auth
 
-### `yarn start`
+# Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- TypeScript
+- React
+- Firebase(Firestore, Firebase Auth)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Commit Emoji
 
-### `yarn test`
+🎨
+:art:
+코드의 구조/형태 개선
+Improve structure / format of the code.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+⚡️
+:zap:
+성능 개선
+Improve performance.
 
-### `yarn build`
+🔥
+:fire:
+코드/파일 삭제
+Remove code or files.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🐛
+:bug:
+버그 수정
+Fix a bug.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🚑
+:ambulance:
+긴급 수정
+Critical hotfix.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+✨
+:sparkles:
+새 기능
+Introduce new features.
 
-### `yarn eject`
+📝
+:memo:
+문서 추가/수정
+Add or update documentation.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+💄
+:lipstick:
+UI/스타일 파일 추가/수정
+Add or update the UI and style files.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+🎉
+:tada:
+프로젝트 시작
+Begin a project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+✅
+:white_check_mark:
+테스트 추가/수정
+Add or update tests.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+🔒
+:lock:
+보안 이슈 수정
+Fix security issues.
 
-## Learn More
+🔖
+:bookmark:
+릴리즈/버전 태그
+Release / Version tags.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+💚
+:green_heart:
+CI 빌드 수정
+Fix CI Build.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+📌
+:pushpin:
+특정 버전 의존성 고정
+Pin dependencies to specific versions.
+
+👷
+:construction_worker:
+CI 빌드 시스템 추가/수정
+Add or update CI build system.
+
+📈
+:chart_with_upwards_trend:
+분석, 추적 코드 추가/수정
+Add or update analytics or track code.
+
+♻️
+:recycle:
+코드 리팩토링
+Refactor code.
+
+➕
+:heavy_plus_sign:
+의존성 추가
+Add a dependency.
+
+➖
+:heavy_minus_sign:
+의존성 제거
+Remove a dependency.
+
+🔧
+:wrench:
+구성 파일 추가/삭제
+Add or update configuration files.
+
+🔨
+:hammer:
+개발 스크립트 추가/수정
+Add or update development scripts.
+
+🌐
+:globe_with_meridians:
+국제화/현지화
+Internationalization and localization.
+
+💩
+:poop:
+똥싼 코드
+Write bad code that needs to be improved.
+
+⏪
+:rewind:
+변경 내용 되돌리기
+Revert changes.
+
+🔀
+:twisted_rightwards_arrows:
+브랜치 합병
+Merge branches.
+
+📦
+:package:
+컴파일된 파일 추가/수정
+Add or update compiled files or packages.
+
+👽
+:alien:
+외부 API 변화로 인한 수정
+Update code due to external API changes.
+
+🚚
+:truck:
+리소스 이동, 이름 변경
+Move or rename resources (e.g.: files paths routes).
+
+📄
+:page_facing_up:
+라이센스 추가/수정
+Add or update license.
+
+💡
+:bulb:
+주석 추가/수정
+Add or update comments in source code.
+
+🍻
+:beers:
+술 취해서 쓴 코드
+Write code drunkenly.
+
+🗃
+:card_file_box:
+데이버베이스 관련 수정
+Perform database related changes.
+
+🔊
+:loud_sound:
+로그 추가/수정
+Add or update logs.
+
+🙈
+:see_no_evil:
+.gitignore 추가/수정
+Add or update a .gitignore file.
+출처: https://inpa.tistory.com/entry/GIT-⚡️-Gitmoji-사용법-Gitmoji-cli [Inpa Dev 👨‍💻:티스토리]
