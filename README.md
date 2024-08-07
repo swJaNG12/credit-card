@@ -49,14 +49,50 @@ const base = css`
   ${containerStyle}
   color: yellow;
 `
-
 function Example() {
-	return (
-		<div css={containerStyle}>
-			<Button>lorem</Button>
-			<p css={base}>lorem ipsum<p/>
-		</div>
-	)
+  return (
+    <div css={containerStyle}>
+      <Button>lorem</Button>
+      <p css={base}>lorem ipsum</p>
+    </div>
+  )
+}
+```
+
+# Shared Components
+
+일관된 디자인으로 통일성을 주기 위해, 텍스트, 버튼을 공통 컴포넌트로 작성
+
+## typography
+
+- 'typography'로 텍스트의 크기, 행간을 지정된 크기로만 사용할 수 있게 만들어 통일성을 향상시킵니다.
+- 'color'로 텍스트 색상을 지정된 색상으로만 사용할 수 있게 만들어 통일성을 향상시킵니다.
+- 'display'로 텍스트의 display 속성을 유연하게 조정할 수 있습니다.
+- 'textAlign'로 텍스트의 가로 정렬을 유연하게 지정할 수 있습니다.
+- 'fontWeight'으로 텍스트의 굵기를 유연하게 지정할 수 있습니다.
+- 'bold'로 텍스트의 굵기를 bold로 설정할지 말지 명시적으로 지정할 수 있습니다.
+
+</br>
+
+- emotion styled components, span tag
+- Props
+  - typography?: `Typography`, defaults to 't5'
+  - color?: `Colors`, defaults to 'black'
+  - display?: `CSSProperties['display']`, defaults to 'inline'
+  - textAlign?: `CSSProperties['textAlign']`, defaults to 'left'
+  - fontWeight?: `CSSProperties['fontWeight']`
+  - bold?: `boolean`
+
+```jsx
+function Example() {
+  return (
+    <div>
+      <Text color={'red'}>t5</Text>
+      <Text typography={'t2'} color={'green'}>
+        t2
+      </Text>
+    </div>
+  )
 }
 ```
 
