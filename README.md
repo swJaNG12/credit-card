@@ -96,6 +96,38 @@ function Example() {
 }
 ```
 
+## button
+
+- 'size'로 버튼의 패딩, 텍스트 크기를 지정된 크기내에서 사용할 수 있게 만들어 통일성있는 스타일을 줄 수 있습니다.
+- 'color', 'toggle'로 버튼의 배경색, 텍스트 색상, 보더를 지정된 색상내에서 사용할 수 있게 만들어 통일성있는 스타일을 줄 수 있습니다.
+- 'disabled'로 버튼이 disabled 되었는지 아닌지 명시적으로 지정할 수 있습니다.
+- 'full'로 버튼이 가로 너비를 꽉 채울지 말지 명시적으로 지정할 수 있습니다.
+
+</br>
+
+- emotion styled components, button tag
+- props
+  - color?: ButtonColorType, defaults to 'primary'
+  - size?: ButtonSizeType, defaults to 'small'
+  - disabled?: boolean
+  - full?: boolean
+  - toggle?: boolean, defaults to
+
+```jsx
+function Example() {
+  return (
+    <div>
+      <Button color={'success'}>click</Button>
+      <Button color="error">click</Button>
+      <Button color="success" toggle={true}>
+        click
+      </Button>
+      <Button disabled={true}>click</Button>
+    </div>
+  )
+}
+```
+
 # Commit Emoji
 
 🎨
