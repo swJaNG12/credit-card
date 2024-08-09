@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import baseStyle from './styles/globalStyles'
-import { Global } from '@emotion/react'
 import { AlertContextProvider } from '@contexts/Alertcontext'
+import { Global } from '@emotion/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Global styles={baseStyle} />
-    <AlertContextProvider>
-      <App />
-    </AlertContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <AlertContextProvider>
+        <App />
+      </AlertContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )
 
