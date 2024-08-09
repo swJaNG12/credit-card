@@ -128,6 +128,33 @@ function Example() {
 }
 ```
 
+## text field
+
+- 'label'로 입력창의 입력창의 라벨을 추가합니다.
+- 'hasError'로 입력의 유효성을 확인합니다.
+- 'helpMessage'로 입력창의 설명을 추가합니다.
+
+</br>
+
+- props
+  - label?: string
+  - hasError?: boolean
+  - helpMessage?: string
+
+```jsx
+function Example() {
+  return (
+    <div>
+      <TextField
+        label="패스워드"
+        hasError={true}
+        helpMessage={'잘못된 입력입니다.'}
+      />
+    </div>
+  )
+}
+```
+
 # Commit Emoji
 
 🎨
