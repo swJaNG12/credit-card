@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
+import { css } from '@emotion/react'
+import { motion } from 'framer-motion'
 
 import { getCard } from '@/remote/card'
 import Top from '@shared/Top'
@@ -7,7 +9,6 @@ import ListRow from '@shared/ListRow'
 import FixedBottomButton from '@shared/FixedBottomButton'
 import Flex from '@shared/Flex'
 import Text from '@shared/Text'
-import { css } from '@emotion/react'
 
 export default function CardPage() {
   const { id = '' } = useParams()
@@ -33,13 +34,20 @@ export default function CardPage() {
       <Top title={`${corpName} ${name}`} subTitle={subTitle} />
       <ul>
         {benefit.map((text, idx) => (
-          <ListRow
-            key={text}
-            left={<IconCheck />}
-            contents={
-              <ListRow.Texts title={`혜택 ${idx + 1}`} subTitle={text} />
-            }
-          />
+          <motion.li
+            initial={{ opacity: 0, x: '-40%' }}
+            animate={{ opacity: 1, x: '0%' }}
+            transition={{ duration: 1, delay: idx * 0.1, ease: 'easeInOut' }}
+          >
+            <ListRow
+              as="div"
+              key={text}
+              left={<IconCheck />}
+              contents={
+                <ListRow.Texts title={`혜택 ${idx + 1}`} subTitle={text} />
+              }
+            />
+          </motion.li>
         ))}
       </ul>
 
