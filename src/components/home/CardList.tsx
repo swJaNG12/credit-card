@@ -1,12 +1,15 @@
 import { getCards } from '@remote/card'
 import ListRow from '@shared/ListRow'
 import Badge from '@shared/Badge'
+import { useNavigate } from 'react-router-dom'
 
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { flatten } from 'lodash'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 export default function CardList() {
+  const navigate = useNavigate()
+
   const {
     data,
     hasNextPage = false,
@@ -36,7 +39,6 @@ export default function CardList() {
 
   const cards = flatten(data.pages.map(({ items }) => items))
 
-  console.log(cards)
   return (
     <div>
       <InfiniteScroll
@@ -58,6 +60,7 @@ export default function CardList() {
               }
               right={card.payback && <Badge label={card.payback} />}
               withArrow={true}
+              onClick={() => navigate(`/card/${card.id}`)}
             />
           ))}
         </ul>
