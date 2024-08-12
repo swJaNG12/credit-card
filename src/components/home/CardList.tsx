@@ -44,6 +44,7 @@ export default function CardList() {
         hasMore={hasNextPage}
         loader={<div>Loading...</div>}
         next={loadMore}
+        scrollThreshold="100px"
       >
         {cards?.map((card, idx) => (
           <ListRow

@@ -12,7 +12,7 @@ import { Card } from '@/models/card'
 // pageParam 지금 보이고 있는 맨 마지막 요소
 export async function getCards(pageParam: any) {
   const cardQuery = !pageParam
-    ? query(collection(db, COLLECTIONS.CARD), limit(10))
+    ? query(collection(db, COLLECTIONS.CARD), limit(15))
     : query(collection(db, COLLECTIONS.CARD), startAfter(pageParam), limit(10))
 
   const querySnapShot = await getDocs(cardQuery)
