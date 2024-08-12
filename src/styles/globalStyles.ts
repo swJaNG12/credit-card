@@ -144,6 +144,10 @@ const baseStyle = css`
     font: inherit;
     line-height: normal;
   }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `
 
 export default baseStyle
