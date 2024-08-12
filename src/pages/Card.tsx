@@ -4,6 +4,10 @@ import { useParams } from 'react-router-dom'
 import { getCard } from '@/remote/card'
 import Top from '@shared/Top'
 import ListRow from '@shared/ListRow'
+import FixedBottomButton from '@shared/FixedBottomButton'
+import Flex from '@shared/Flex'
+import Text from '@shared/Text'
+import { css } from '@emotion/react'
 
 export default function CardPage() {
   const { id = '' } = useParams()
@@ -27,13 +31,26 @@ export default function CardPage() {
   return (
     <div>
       <Top title={`${corpName} ${name}`} subTitle={subTitle} />
-      {benefit.map((text, idx) => (
-        <ListRow
-          key={text}
-          left={<IconCheck />}
-          contents={<ListRow.Texts title={`혜택 ${idx + 1}`} subTitle={text} />}
-        />
-      ))}
+      <ul>
+        {benefit.map((text, idx) => (
+          <ListRow
+            key={text}
+            left={<IconCheck />}
+            contents={
+              <ListRow.Texts title={`혜택 ${idx + 1}`} subTitle={text} />
+            }
+          />
+        ))}
+      </ul>
+
+      {promotion && (
+        <Flex direction="column" css={termsContainerStyles}>
+          <Text bold={true}>유의사항</Text>
+          <Text typography="t7">{removeHtmlTags(promotion.terms)}</Text>
+        </Flex>
+      )}
+
+      <FixedBottomButton label="신청하기" onClick={() => {}} />
     </div>
   )
 }
@@ -84,3 +101,8 @@ function IconCheck() {
     </svg>
   )
 }
+
+const termsContainerStyles = css`
+  margin-top: 80px;
+  padding: 0 24px 80px;
+`
