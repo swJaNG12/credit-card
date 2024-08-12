@@ -1,9 +1,10 @@
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { getCards } from '@remote/card'
 import ListRow from '@shared/ListRow'
+import Badge from '@shared/Badge'
+
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 import { flatten } from 'lodash'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useCallback } from 'react'
 
 export default function CardList() {
   const {
@@ -33,10 +34,9 @@ export default function CardList() {
     fetchNextPage()
   }
 
-  console.log(hasNextPage)
-
   const cards = flatten(data.pages.map(({ items }) => items))
 
+  console.log(cards)
   return (
     <div>
       <InfiniteScroll
@@ -54,11 +54,7 @@ export default function CardList() {
                 subTitle={`${card.name}`}
               />
             }
-            right={
-              <div>
-                {card.payback !== null ? <div>{card.payback}</div> : null}
-              </div>
-            }
+            right={card.payback && <Badge label={card.payback} />}
             withArrow={true}
           />
         ))}
