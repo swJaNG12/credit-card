@@ -36,7 +36,6 @@ export default function AdBanners() {
 
 const Container = styled.div`
   padding: 24px;
-  border: 1px solid red;
   display: flex;
 `
 
