@@ -16,12 +16,10 @@ export default function Form() {
     rePassword: '',
     name: '',
   })
+  const [dirty, setDirty] = useState<Partial<FormValues>>({})
 
   const handleFormValues = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.name)
-      console.log(e.target.value)
-
       setFormValues((prevFormValue) => ({
         ...prevFormValue,
         [e.target.name]: e.target.value,
@@ -30,9 +28,14 @@ export default function Form() {
     [],
   )
 
-  const errors = useMemo(() => validate(formValues), [formValues])
+  const handleBlur = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setDirty((prevDrity) => ({
+      ...prevDrity,
+      [e.target.name]: 'true',
+    }))
+  }, [])
 
-  console.log(errors)
+  const errors = useMemo(() => validate(formValues), [formValues])
 
   const isFormValid = Object.keys(errors).length === 0
 
@@ -44,8 +47,9 @@ export default function Form() {
         name="email"
         value={formValues.email}
         onChange={handleFormValues}
-        hasError={Boolean(errors.email)}
-        helpMessage={errors.email}
+        hasError={Boolean(dirty.email) && Boolean(errors.email)}
+        helpMessage={Boolean(dirty.email) ? errors.email : ''}
+        onBlur={handleBlur}
       />
       <Spacing size={16} />
       <TextField
@@ -54,8 +58,9 @@ export default function Form() {
         name="password"
         value={formValues.password}
         onChange={handleFormValues}
-        hasError={Boolean(errors.password)}
-        helpMessage={errors.password}
+        hasError={Boolean(dirty.password) && Boolean(errors.password)}
+        helpMessage={Boolean(dirty.password) ? errors.password : ''}
+        onBlur={handleBlur}
       />
       <Spacing size={16} />
       <TextField
@@ -64,8 +69,9 @@ export default function Form() {
         name="rePassword"
         value={formValues.rePassword}
         onChange={handleFormValues}
-        hasError={Boolean(errors.rePassword)}
-        helpMessage={errors.rePassword}
+        hasError={Boolean(dirty.rePassword) && Boolean(errors.rePassword)}
+        helpMessage={Boolean(dirty.rePassword) ? errors.rePassword : ''}
+        onBlur={handleBlur}
       />
       <Spacing size={16} />
       <TextField
@@ -74,8 +80,9 @@ export default function Form() {
         name="name"
         value={formValues.name}
         onChange={handleFormValues}
-        hasError={Boolean(errors.name)}
-        helpMessage={errors.name}
+        hasError={Boolean(dirty.name) && Boolean(errors.name)}
+        helpMessage={Boolean(dirty.name) ? errors.name : ''}
+        onBlur={handleBlur}
       />
 
       <FixedBottomButton
