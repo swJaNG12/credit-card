@@ -7,7 +7,7 @@ import { FormValues } from '@models/Signup'
 import { css } from '@emotion/react'
 import { isEmail, equals } from 'validator'
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 export default function Form() {
   const [formValues, setFormValues] = useState<FormValues>({
@@ -30,6 +30,12 @@ export default function Form() {
     [],
   )
 
+  const errors = useMemo(() => validate(formValues), [formValues])
+
+  console.log(errors)
+
+  const isFormValid = Object.keys(errors).length === 0
+
   return (
     <Flex direction="column" css={formContainerStyles}>
       <TextField
@@ -38,6 +44,8 @@ export default function Form() {
         name="email"
         value={formValues.email}
         onChange={handleFormValues}
+        hasError={Boolean(errors.email)}
+        helpMessage={errors.email}
       />
       <Spacing size={16} />
       <TextField
@@ -46,6 +54,8 @@ export default function Form() {
         name="password"
         value={formValues.password}
         onChange={handleFormValues}
+        hasError={Boolean(errors.password)}
+        helpMessage={errors.password}
       />
       <Spacing size={16} />
       <TextField
@@ -54,6 +64,8 @@ export default function Form() {
         name="rePassword"
         value={formValues.rePassword}
         onChange={handleFormValues}
+        hasError={Boolean(errors.rePassword)}
+        helpMessage={errors.rePassword}
       />
       <Spacing size={16} />
       <TextField
@@ -62,9 +74,15 @@ export default function Form() {
         name="name"
         value={formValues.name}
         onChange={handleFormValues}
+        hasError={Boolean(errors.name)}
+        helpMessage={errors.name}
       />
 
-      <FixedBottomButton label="회원가입" onClick={() => {}} disabled={false} />
+      <FixedBottomButton
+        label="회원가입"
+        onClick={() => {}}
+        disabled={!isFormValid}
+      />
     </Flex>
   )
 }
