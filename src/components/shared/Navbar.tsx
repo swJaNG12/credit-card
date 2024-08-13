@@ -1,22 +1,40 @@
-import { colors } from '@/styles/colorPalette'
+import { colors } from '@styles/colorPalette'
 import { css } from '@emotion/react'
-import { Link, useLocation } from 'react-router-dom'
+import useUser from '@hooks/auth/useUser'
 import Button from './Button'
 import Flex from './Flex'
 
+import { Link, useLocation } from 'react-router-dom'
+import { useCallback } from 'react'
+
 export default function Navbar() {
   const location = useLocation()
+  const user = useUser()
+
+  console.log(user)
 
   const showSignButton = !['/signin', '/signup'].includes(location.pathname)
+
+  const renderButton = useCallback(() => {
+    if (showSignButton) {
+      if (user === null) {
+        return (
+          <Link to={'/signin'}>
+            <Button>로그인/회원가입</Button>
+          </Link>
+        )
+      } else {
+        return <Button>로그아웃</Button>
+      }
+    }
+
+    return null
+  }, [user, showSignButton])
 
   return (
     <Flex align="center" justify="space-between" css={NavbarContainerStyles}>
       <Link to={'/'}>home</Link>
-      {showSignButton && (
-        <Link to={'/signin'}>
-          <Button>로그인/회원가입</Button>
-        </Link>
-      )}
+      {renderButton()}
     </Flex>
   )
 }
