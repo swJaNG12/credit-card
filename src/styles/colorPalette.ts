@@ -3,11 +3,11 @@ import { css } from '@emotion/react'
 export const colorPalette = css`
   :root {
     --red: #c5705d;
-    --blue: #5b99c2;
+    --blue: #478ccf;
     --green: #88d66c;
     --white: #fefefe;
     --black: #1a1a1a;
-    --gray: #77acb7;
+    --gray: #77e4c8;
   }
 `
 
