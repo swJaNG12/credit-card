@@ -9,7 +9,11 @@ import { isEmail, equals } from 'validator'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
-export default function Form() {
+interface FormProps {
+  onSubmit: (formValues: FormValues) => void
+}
+
+export default function Form({ onSubmit }: FormProps) {
   const [formValues, setFormValues] = useState<FormValues>({
     email: '',
     password: '',
@@ -87,7 +91,7 @@ export default function Form() {
 
       <FixedBottomButton
         label="회원가입"
-        onClick={() => {}}
+        onClick={() => onSubmit(formValues)}
         disabled={!isFormValid}
       />
     </Flex>
