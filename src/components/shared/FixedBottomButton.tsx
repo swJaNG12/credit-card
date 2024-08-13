@@ -9,11 +9,13 @@ import { colors } from '@/styles/colorPalette'
 interface FixedBottomButtonProps {
   label: string
   onClick: () => void
+  disabled?: boolean
 }
 
 export default function FixedBottomButton({
   label,
   onClick,
+  disabled,
 }: FixedBottomButtonProps) {
   const $portalRoot = document.getElementById('root-portal')
 
@@ -23,7 +25,13 @@ export default function FixedBottomButton({
 
   return createPortal(
     <Container>
-      <Button size="medium" css={ButtonStyle} full={true} onClick={onClick}>
+      <Button
+        size="medium"
+        css={ButtonStyle}
+        full={true}
+        onClick={onClick}
+        disabled={disabled}
+      >
         {label}
       </Button>
     </Container>,
