@@ -16,15 +16,18 @@ export default function Form() {
     name: '',
   })
 
-  const handleFormValues = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name)
-    console.log(e.target.value)
+  const handleFormValues = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(e.target.name)
+      console.log(e.target.value)
 
-    setFormValues((prevFormValue) => ({
-      ...prevFormValue,
-      [e.target.name]: e.target.value,
-    }))
-  }
+      setFormValues((prevFormValue) => ({
+        ...prevFormValue,
+        [e.target.name]: e.target.value,
+      }))
+    },
+    [],
+  )
 
   return (
     <Flex direction="column" css={formContainerStyles}>
