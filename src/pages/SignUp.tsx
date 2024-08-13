@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth, db } from '@remote/firebase'
-import { FormValues } from '@models/Signup'
+import { FormValues } from '@models/signup'
 import Form from '@components/signup/Form'
 import { collection, doc, setDoc } from 'firebase/firestore'
 import { COLLECTIONS } from '@/constants'

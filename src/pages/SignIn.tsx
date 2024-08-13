@@ -1,6 +1,6 @@
 import { auth } from '@/remote/firebase'
 import Form from '@components/signin/Form'
-import { FormValues } from '@models/Signin'
+import { FormValues } from '@models/signin'
 import { useAlertContext } from '@contexts/Alertcontext'
 
 import { signInWithEmailAndPassword } from 'firebase/auth'

@@ -2,7 +2,7 @@ import Flex from '@shared/Flex'
 import TextField from '@shared/TextField'
 import FixedBottomButton from '@shared/FixedBottomButton'
 import Spacing from '@shared/Spacing'
-import { FormValues } from '@models/Signup'
+import { FormValues } from '@models/signup'
 
 import { css } from '@emotion/react'
 import { isEmail, equals } from 'validator'

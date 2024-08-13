@@ -4,7 +4,7 @@ import Button from '@shared/Button'
 import Spacing from '@shared/Spacing'
 import Text from '@shared/Text'
 
-import { FormValues } from '@models/Signin'
+import { FormValues } from '@models/signin'
 import { colors } from '@styles/colorPalette'
 
 import React, { useCallback, useMemo, useState } from 'react'
