@@ -67,7 +67,7 @@ export function AlertContextProvider({
 
 export const useAlertContext = () => {
   const value = useContext(Context)
-  if (value === null) {
+  if (!value) {
     throw Error('AlertContext 내부에서 사용해주세요')
   }
   return value
