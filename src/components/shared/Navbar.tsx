@@ -13,7 +13,7 @@ export default function Navbar() {
     <Flex align="center" justify="space-between" css={NavbarContainerStyles}>
       <Link to={'/'}>home</Link>
       {showSignButton && (
-        <Link to={'/signup'}>
+        <Link to={'/signin'}>
           <Button>로그인/회원가입</Button>
         </Link>
       )}
