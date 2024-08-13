@@ -1,11 +1,13 @@
 import { colors } from '@styles/colorPalette'
 import { css } from '@emotion/react'
 import useUser from '@hooks/auth/useUser'
+import { auth } from '@remote/firebase'
 import Button from './Button'
 import Flex from './Flex'
 
 import { Link, useLocation } from 'react-router-dom'
 import { useCallback } from 'react'
+import { signOut } from 'firebase/auth'
 
 export default function Navbar() {
   const location = useLocation()
@@ -14,6 +16,10 @@ export default function Navbar() {
   console.log(user)
 
   const showSignButton = !['/signin', '/signup'].includes(location.pathname)
+
+  const handleLogout = async () => {
+    await signOut(auth)
+  }
 
   const renderButton = useCallback(() => {
     if (showSignButton) {
@@ -24,7 +30,7 @@ export default function Navbar() {
           </Link>
         )
       } else {
-        return <Button>로그아웃</Button>
+        return <Button onClick={handleLogout}>로그아웃</Button>
       }
     }
 
