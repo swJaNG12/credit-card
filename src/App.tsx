@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScrollToTop from '@shared/ScrollToTop'
+import Navbar from '@shared/Navbar'
 import HomePage from '@pages/Home'
 import TestPage from '@pages/Test'
 import CardPage from '@pages/Card'
@@ -10,6 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
