@@ -5,6 +5,7 @@ import Spacing from '@shared/Spacing'
 import { FormValues } from '@models/Signup'
 
 import { css } from '@emotion/react'
+import { isEmail, equals } from 'validator'
 
 import React, { useCallback, useState } from 'react'
 
@@ -71,3 +72,27 @@ export default function Form() {
 const formContainerStyles = css`
   padding: 24px;
 `
+
+function validate(formValues: FormValues) {
+  let errors: Partial<FormValues> = {}
+
+  if (isEmail(formValues.email) === false) {
+    errors.email = '이메일 형식을 확인해주세요'
+  }
+
+  if (formValues.password.length < 8) {
+    errors.password = '비밀번호는 8글자 이상 입력해주세요'
+  }
+
+  if (formValues.rePassword.length < 8) {
+    errors.rePassword = '비밀번로는 8글자 이상 입력해주세요'
+  } else if (equals(formValues.rePassword, formValues.password) === false) {
+    errors.rePassword = '비밀번호를 확인해주세요'
+  }
+
+  if (formValues.name.length < 2) {
+    errors.name = '이름은 2글자 이상 입력해주세요'
+  }
+
+  return errors
+}
