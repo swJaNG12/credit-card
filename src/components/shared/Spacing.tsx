@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 interface SapcingProps {
   size: number
-  direction: 'vertical' | 'horizontal'
+  direction?: 'vertical' | 'horizontal'
 }
 
 const Spacing = styled.div<SapcingProps>`
