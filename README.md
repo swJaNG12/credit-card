@@ -155,6 +155,41 @@ function Example() {
 }
 ```
 
+# input dirty
+
+회원가입 페이지에서 입력창에 에러가 발생하는 경우는 올바르지 않은 입력을 하거나, 입력을 했다가 input에서 focus가 벗어나는 순간일 것이다.
+
+기능을 작업할 당시 errors는 회원가입 페이지에 들어가는 순간부터 채워져있고, 올바른 입력을 하면 에러가 지워지는 로직으로 작성했었다. 그래서 회원가입 페이지에 들어가자마자 아무것도 하지 않았는데 input은 에러로 판단하고 에러메세지를 보여주고 있었다. 이 문제를 해결하기 위해 dirty state를 추가해 에러메세지를 가지고는 있지만 dirty 상태, 즉 입력을 다 끝내지 않고 focus를 옮겼을 때 에러메세지를 보여주도록 작업했다.
+
+```tsx
+...
+const [dirty, setDirty] = useState<Partial<FormValues>>({})
+const handleBlur = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  setDirty((prevDrity) => ({
+    ...prevDrity,
+    [e.target.name]: 'true',
+  }))
+}, [])
+...
+
+return (
+	...
+		<TextField
+			label="이메일"
+			placeholder="이메일"
+			name="email"
+			value={formValues.email}
+			onChange={handleFormValues}
+			hasError={Boolean(dirty.email) && Boolean(errors.email)}
+			helpMessage={Boolean(dirty.email) ? errors.email : ''}
+			onBlur={handleBlur}
+		/>
+	...
+)
+```
+
+</br>
+
 # Commit Emoji
 
 🎨
