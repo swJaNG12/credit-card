@@ -4,6 +4,7 @@ import './index.css'
 import App from './App'
 import baseStyle from './styles/globalStyles'
 import { AlertContextProvider } from '@contexts/Alertcontext'
+import AuthGuard from '@components/auth/AuthGuard'
 import { Global } from '@emotion/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -15,7 +16,9 @@ root.render(
     <Global styles={baseStyle} />
     <QueryClientProvider client={queryClient}>
       <AlertContextProvider>
-        <App />
+        <AuthGuard>
+          <App />
+        </AuthGuard>
       </AlertContextProvider>
     </QueryClientProvider>
   </React.StrictMode>,
