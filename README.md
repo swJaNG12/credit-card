@@ -266,6 +266,91 @@ export default App
 
 ```
 
+# UX 고려사항
+
+## 적절한 안내 메세지 보여주기
+
+### 1. 로그인 상황
+
+로그인할 때 여러 에러가 발생할 수 있다. 인증을 담당하는 Firebase 에러가 발생할 수도 있고, 또 서비스 자체의 문제로 에러가 발생할 수도 있다. 이러한 경우, 모두 같은 메시지를 보여주기 보다는 사용자에게 어떤 문제로 장애가 발생했는지 적절하게 구분지어서 안내한다면 사용자 경험을 높일 수 있을 것이다.
+
+#### 해결방안
+
+Signin.tsx
+
+```tsx
+try {
+  const user = await signInWithEmailAndPassword(auth, email, password)
+
+  navigate(-1)
+} catch (error) {
+  // firebase 에러
+  if (error instanceof FirebaseError) {
+    open({
+      title: '계정 정보를 다시 확인해주세요',
+      onButtonClick: () => {
+        //
+      },
+    })
+
+    return
+  }
+  // 일반적인 에러
+  console.log(error)
+  open({
+    title: '잠시 후 다시 시도해주세요',
+    onButtonClick: () => {
+      //
+    },
+  })
+}
+```
+
+### 2. 카드 신청하기 상황
+
+카드 신청하기 페이지(`/apply/:cardId`)는 유저가 로그인이 된 경우에만 이동가능한 페이지다. 그래서 유저가 로그인을 하지 않은 상황에서 카드정보 상세페이지(`/card/:cardId/`)에 있는 '신청하기' 버튼을 클릭한다면 로그인 페이지로 이동하게 된다. </br>
+이때 아무런 안내 메세지 없이 바로 로그인 페이지로 이동하게 된다면 서비스에 익숙하지 않은 사용자는 당황할 수 있다("신청하기를 눌렀는 데 바로 로그인 페이지로 이동하네?")
+</br>
+이렇게 된다면 사용자에게 친절하지 못하고 어색할 수 있기 떄문에 사용자 경험이 낮아질 수 있다.
+
+#### 해결방안
+
+사용자에게 먼저 카드 신청하기 서비스는 로그인이 필요한 서비스라는 것을 안내하고, 로그인 페이지로 이동한다면 사용자 경험을 높일 수 있을 것이다.
+
+Card.tsx에 moveToApply 함수를 추가할 수 있다.
+
+```tsx
+const { id = '' } = useParams()
+const navigate = useNavigate()
+const user = useUser()
+const { open } = useAlertContext()
+
+const moveToApply = useCallback(() => {
+  if (user === null) {
+    open({
+      title: '로그인이 필요한 서비스입니다.',
+      onButtonClick: () => {
+        navigate(`/signin`)
+      },
+    })
+
+    return
+  } else {
+    navigate(`/apply/${id}`)
+  }
+}, [user, id, open, navigate])
+```
+
+유저 정보를 확인하고 Alert을 띄워서 안내 메세지를 보여주고 로그인 페이지로 이동시킨다.
+
+### 추가
+
+위 순서로 로그인을 진행한다면 로그인 후 홈 화면으로 이동하기 보다는 이전에 신청하기 버튼을 클릭했던 카드 상세 페이지로 이동하는게 더 자연스럽다. 그래서 로그인 후 navigate(-1)로 수정해서 이전 페이지로 이동할 수 있게 수정했다.
+
+```
+
+</br>
+
 # Commit Emoji
 
 🎨
@@ -438,3 +523,4 @@ Add or update logs.
 .gitignore 추가/수정
 Add or update a .gitignore file.
 출처: https://inpa.tistory.com/entry/GIT-⚡️-Gitmoji-사용법-Gitmoji-cli [Inpa Dev 👨‍💻:티스토리]
+```
