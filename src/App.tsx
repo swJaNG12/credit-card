@@ -4,8 +4,10 @@ import Navbar from '@shared/Navbar'
 import HomePage from '@pages/Home'
 import TestPage from '@pages/Test'
 import CardPage from '@pages/Card'
-import SignUp from '@pages/SignUp'
-import SignIn from '@pages/SignIn'
+import SignUpPage from '@pages/SignUp'
+import SignInPage from '@pages/SignIn'
+
+import PrivateRoute from '@components/auth/PrivateRoute'
 
 function App() {
   return (
@@ -14,8 +16,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
         <Route path="/card/:id" element={<CardPage />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
