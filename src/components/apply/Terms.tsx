@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import Agreement from '@shared/Agreement'
+import FixedBottomButton from '@shared/FixedBottomButton'
 
 import { TermsList } from '@constants/apply'
 
-export default function Terms() {
+export default function Terms({
+  onNext,
+}: {
+  onNext: (terms: string[]) => void
+}) {
   // useState(fn) => fn의 역할은 termsAgreements 초기값을 생성하는 것
   // 초기값은 {termId1: boolean, termId2: boolean, ...} 이런 형태다.
   const [termsAgreement, setTermsAgreement] = useState(() => {
@@ -15,8 +20,6 @@ export default function Terms() {
       {},
     )
   })
-
-  console.log(termsAgreement)
 
   const handleAllAgreement = (checked: boolean) => {
     const result = Object.keys(termsAgreement).reduce(
@@ -61,6 +64,13 @@ export default function Terms() {
           </Agreement.Description>
         ))}
       </Agreement>
+      <FixedBottomButton
+        label="약관 동의"
+        disabled={!isAllTermsAgreed}
+        onClick={() => {
+          onNext(Object.keys(termsAgreement))
+        }}
+      />
     </div>
   )
 }
