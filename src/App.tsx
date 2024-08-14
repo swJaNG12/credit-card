@@ -6,6 +6,7 @@ import TestPage from '@pages/Test'
 import CardPage from '@pages/Card'
 import SignUpPage from '@pages/SignUp'
 import SignInPage from '@pages/SignIn'
+import ApplyPage from '@pages/Apply'
 
 import PrivateRoute from '@components/auth/PrivateRoute'
 
@@ -19,6 +20,14 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/card/:id" element={<CardPage />} />
+        <Route
+          path="/apply/:id"
+          element={
+            <PrivateRoute>
+              <ApplyPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/test" element={<TestPage />} />
       </Routes>
     </BrowserRouter>
