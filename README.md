@@ -207,6 +207,65 @@ onAuthStateChanged 함수는 Firebase Authentication에서 사용자 인증 상�
 
 </br>
 
+# Private Route
+
+PrivateRoute.tsx
+
+```tsx
+import useUser from '@hooks/auth/useUser'
+import React from 'react'
+import { Navigate } from 'react-router-dom'
+
+// 유저의 정보를 받아서 어떤 페이지로 보낼지 결정
+export default function PrivateRoute({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const user = useUser()
+
+  // 로그인이 되어있지 않다면 로그인 페이지로
+  if (user === null) {
+    return <Navigate to="/signin" replace={true} />
+  }
+
+  return <>{children}</>
+}
+```
+
+App.tsx
+
+```tsx
+...
+import PrivateRoute from '@components/auth/PrivateRoute'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/card/:id" element={<CardPage />} />
+        <Route
+          path="/apply/:id"
+          element={
+            <PrivateRoute>
+              <ApplyPage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/test" element={<TestPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+export default App
+
+```
+
 # Commit Emoji
 
 🎨
