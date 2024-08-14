@@ -12,7 +12,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const setUserState = useSetRecoilState(userAtom)
 
   onAuthStateChanged(auth, (user) => {
-    console.log('auth gauard', user)
+    // console.log('auth gauard', user)
     if (user !== null) {
       setUserState({
         uid: user.uid,
