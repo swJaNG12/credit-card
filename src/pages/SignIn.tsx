@@ -21,7 +21,7 @@ export default function SignInPage() {
 
         console.log('signinPage', user)
 
-        navigate('/')
+        navigate(-1)
       } catch (error) {
         // firebase 에러
         if (error instanceof FirebaseError) {
