@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { css } from '@emotion/react'
 import { motion } from 'framer-motion'
 
@@ -12,6 +12,7 @@ import Text from '@shared/Text'
 
 export default function CardPage() {
   const { id = '' } = useParams()
+  const navigate = useNavigate()
 
   const { data } = useQuery({
     queryKey: ['card', id],
@@ -59,7 +60,12 @@ export default function CardPage() {
         </Flex>
       )}
 
-      <FixedBottomButton label="신청하기" onClick={() => {}} />
+      <FixedBottomButton
+        label="신청하기"
+        onClick={() => {
+          navigate(`/apply/${id}`)
+        }}
+      />
     </div>
   )
 }
