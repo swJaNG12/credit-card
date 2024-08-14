@@ -38,6 +38,7 @@ export default function CardPage() {
             initial={{ opacity: 0, x: '-40%' }}
             animate={{ opacity: 1, x: '0%' }}
             transition={{ duration: 1, delay: idx * 0.1, ease: 'easeInOut' }}
+            key={idx}
           >
             <ListRow
               as="div"
