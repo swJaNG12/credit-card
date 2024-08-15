@@ -3,12 +3,11 @@ import Agreement from '@shared/Agreement'
 import FixedBottomButton from '@shared/FixedBottomButton'
 
 import { TermsList } from '@constants/apply'
+import { ApplyValues } from '@models/apply'
 
-export default function Terms({
-  onNext,
-}: {
-  onNext: (terms: string[]) => void
-}) {
+type Terms = ApplyValues['terms']
+
+export default function Terms({ onNext }: { onNext: (terms: Terms) => void }) {
   // useState(fn) => fn의 역할은 termsAgreements 초기값을 생성하는 것
   // 초기값은 {termId1: boolean, termId2: boolean, ...} 이런 형태다.
   const [termsAgreement, setTermsAgreement] = useState(() => {

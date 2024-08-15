@@ -5,11 +5,12 @@ import CardInfo from '@components/apply/CardInfo'
 import { ApplyValues } from '@models/apply'
 
 type BasicInfoValues = Pick<ApplyValues, 'salary' | 'creditScore' | 'payDate'>
+type Terms = ApplyValues['terms']
 
 export default function ApplyPage() {
   const [step, setStep] = useState<Number>(1)
 
-  const handleTermsChange = (terms: string[]) => {
+  const handleTermsChange = (terms: Terms) => {
     console.log('terms', terms)
   }
   const handleBasicInfoChage = (basicInfoValues: BasicInfoValues) => {
