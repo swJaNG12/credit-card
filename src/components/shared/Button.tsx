@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import React from 'react'
 import {
   ButtonColorType,
   ButtonSizeType,
@@ -7,9 +8,9 @@ import {
   buttonToggleMap,
   buttonSizeMap,
 } from '@styles/button'
-import React from 'react'
 import Flex from './Flex'
 import Text from './Text'
+import Spacing from './Spacing'
 
 interface ButtonProps {
   color?: ButtonColorType
@@ -53,8 +54,15 @@ export function ButtonGroup({
   children: React.ReactNode
 }) {
   return (
-    <Flex>
-      {title && <Text>{title}</Text>}
+    <Flex direction="column">
+      {title && (
+        <>
+          <Text typography="t6" bold={true}>
+            {title}
+          </Text>
+          <Spacing size={6} />
+        </>
+      )}
       <Flex css={ButtonGroupStyle}>{children}</Flex>
     </Flex>
   )
