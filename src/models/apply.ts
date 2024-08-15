@@ -10,9 +10,12 @@ export interface Term {
 // 전체 데이터 인터페이스
 export interface ApplyValues {
   userId: User['uid']
-  terms: Array<Term['id']>
   appliedAt: Date
   cardId: string
+  terms: Array<Term['id']>
+  salary: string
+  creditScore: string
+  payDate: string
 }
 
 export interface Option {
