@@ -27,7 +27,9 @@ export default function ApplyPage() {
           status: APPLY_STATUS.COMPLETE,
         } as Partial<ApplyValues>,
       })
-      navigate('/apply/done?success=true')
+      navigate('/apply/done?success=true', {
+        replace: true,
+      })
     } else if (status === APPLY_STATUS.REJECT) {
       console.log('실패')
       await updateApplyCard({
@@ -37,7 +39,9 @@ export default function ApplyPage() {
           status: APPLY_STATUS.REJECT,
         } as Partial<ApplyValues>,
       })
-      navigate('/apply/done?success=false')
+      navigate('/apply/done?success=false', {
+        replace: true,
+      })
     }
   }
 
