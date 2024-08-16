@@ -21,6 +21,8 @@ swJaNG12
 - React
 - Firebase(Firestore, Firebase Auth)
 - emotion
+- react-query(tanstack query)
+- recoil
 
 # Styles
 
@@ -370,6 +372,22 @@ const moveToApply = useCallback(() => {
 자식 컴포넌트는 데이터를 생성하고 부모 컴포넌트에 보내주는 역할만 수행하며, 부모 컴포넌트는 자식 컴포넌트가 넘겨준 데이터를 모아서 관리하고, 각 단계에 대한 분기처리를 수행한다. 이렇게 하면 데이터를 전역으로 관리하지 않아도, 단순 state나 변수만으로도 처리할 수 있기 때문에 상태관리가 좀 더 단순해 질 수 있다. 그리고 관심사를 분리해 각 컴포넌트가 특정 역할만 담당하게 되기 때문에 코드가 더 명확해지고 유지보수도 용이해진다.
 
 </br>
+
+# Polling(폴링)
+
+> Polling(폴링) </br>
+> 일정한 주기로 서버와 응답을 주고받는 방식 </br>
+
+카드 신청 요청을 외부서비스에 보낸 뒤, 현재 신청 상태를 체크하기 위해 사용
+
+## react-query로 Polling 구현
+
+> react-query에서는 "refetchInterval", "refetchIntervalInBackground"을 이용해서 구현할 수 있다.
+
+- refetchInterval: 일정 시간마다 자동으로 refetch 시켜준다. 함수를 전달하여 refetch 주기를 동적으로 전달할 수도 있다.
+- refetchIntervalInBackground: true로 설정하면, refetchInterval이 설정된 쿼리가 사용자의 탭 또는 창이 백그라운드에 있을 때도 지속적으로 refetch를 수행한다.
+  기본값은 false로, 이 경우 사용자가 해당 탭에서 벗어나면 refetch가 중단됩니다.
+  </br>
 
 # Commit Emoji
 
