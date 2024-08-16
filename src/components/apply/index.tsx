@@ -1,29 +1,58 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Terms from '@components/apply/Terms'
 import BasicInfo from '@components/apply/BasicInfo'
 import CardInfo from '@components/apply/CardInfo'
 import { ApplyValues } from '@models/apply'
+import useUser from '@hooks/auth/useUser'
 
 type BasicInfoValues = Pick<ApplyValues, 'salary' | 'creditScore' | 'payDate'>
 type Terms = ApplyValues['terms']
 type CardInfoValues = Pick<ApplyValues, 'isHipass' | 'isMaster' | 'isRf'>
 
-export default function Apply({
-  step,
-  onSubmit,
-}: {
-  step: number
-  onSubmit: () => void
-}) {
+export default function Apply({ onSubmit }: { onSubmit: () => void }) {
+  const user = useUser()
+  const { id } = useParams()
+
+  const [step, setStep] = useState<number>(0)
+
+  const [applyValues, setApplyValues] = useState<Partial<ApplyValues>>({
+    userId: user?.uid,
+    cardId: id,
+  })
+
+  useEffect(() => {
+    if (step === 3) {
+      console.log('useEffect', applyValues)
+    }
+  }, [step, onSubmit])
+
   const handleTermsChange = (terms: Terms) => {
-    console.log('terms', terms)
+    setApplyValues((prevValues) => ({
+      ...prevValues,
+      terms,
+    }))
+
+    setStep((prevStep) => prevStep + 1)
   }
   const handleBasicInfoChage = (basicInfoValues: BasicInfoValues) => {
-    console.log('info', basicInfoValues)
+    setApplyValues((prevValues) => ({
+      ...prevValues,
+      ...basicInfoValues,
+    }))
+
+    setStep((prevStep) => prevStep + 1)
   }
   const handleCardInfoChange = (cardInfo: CardInfoValues) => {
-    console.log('cardInfo', cardInfo)
+    setApplyValues((prevalues) => ({
+      ...prevalues,
+      ...cardInfo,
+    }))
+
+    setStep((prevStep) => prevStep + 1)
   }
+
+  console.log(applyValues)
 
   return (
     <div>

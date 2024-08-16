@@ -7,11 +7,9 @@ type Terms = ApplyValues['terms']
 type CardInfoValues = Pick<ApplyValues, 'isHipass' | 'isMaster' | 'isRf'>
 
 export default function ApplyPage() {
-  const [step, setStep] = useState<number>(2)
-
   const handleSubmot = () => {
     // 카드 신청
   }
 
-  return <Apply step={step} onSubmit={handleSubmot} />
+  return <Apply onSubmit={handleSubmot} />
 }
