@@ -3,14 +3,18 @@ import { useParams } from 'react-router-dom'
 import Terms from '@components/apply/Terms'
 import BasicInfo from '@components/apply/BasicInfo'
 import CardInfo from '@components/apply/CardInfo'
-import { ApplyValues } from '@models/apply'
+import { ApplyValues, APPLY_STATUS } from '@models/apply'
 import useUser from '@hooks/auth/useUser'
 
 type BasicInfoValues = Pick<ApplyValues, 'salary' | 'creditScore' | 'payDate'>
 type Terms = ApplyValues['terms']
 type CardInfoValues = Pick<ApplyValues, 'isHipass' | 'isMaster' | 'isRf'>
 
-export default function Apply({ onSubmit }: { onSubmit: () => void }) {
+export default function Apply({
+  onSubmit,
+}: {
+  onSubmit: (applyValues: ApplyValues) => void
+}) {
   const user = useUser()
   const { id } = useParams()
 
@@ -23,9 +27,13 @@ export default function Apply({ onSubmit }: { onSubmit: () => void }) {
 
   useEffect(() => {
     if (step === 3) {
-      console.log('useEffect', applyValues)
+      onSubmit({
+        ...applyValues,
+        appliedAt: new Date(),
+        status: APPLY_STATUS.READY,
+      } as ApplyValues)
     }
-  }, [step, onSubmit])
+  }, [step, onSubmit, applyValues])
 
   const handleTermsChange = (terms: Terms) => {
     setApplyValues((prevValues) => ({
