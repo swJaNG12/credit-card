@@ -7,6 +7,7 @@ import CardPage from '@pages/Card'
 import SignUpPage from '@pages/SignUp'
 import SignInPage from '@pages/SignIn'
 import ApplyPage from '@pages/Apply'
+import ApplyDone from '@pages/ApplyDone'
 
 import PrivateRoute from '@components/auth/PrivateRoute'
 
@@ -25,6 +26,14 @@ function App() {
           element={
             <PrivateRoute>
               <ApplyPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/apply/done"
+          element={
+            <PrivateRoute>
+              <ApplyDone />
             </PrivateRoute>
           }
         />
