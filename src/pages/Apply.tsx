@@ -4,14 +4,41 @@ import { ApplyValues, APPLY_STATUS } from '@/models/apply'
 import { updateApplyCard } from '@/remote/apply'
 import Apply from '@components/apply'
 import useApplyCardMutation from '@components/apply/hooks/useApplyCardMutation'
-import { useState } from 'react'
+import useAppliedCard from '@components/apply/hooks/useAppliedCard'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useAlertContext } from '@/contexts/Alertcontext'
 
 export default function ApplyPage() {
   const user = useUser()
   const { id } = useParams()
   const navigate = useNavigate()
+  const { open } = useAlertContext()
+
   const [readyToPoll, setReadyToPoll] = useState(false)
+
+  const { data: appliedCard } = useAppliedCard({
+    userId: user?.uid as string,
+    cardId: id as string,
+  })
+
+  console.log('appliedCard', appliedCard)
+  useEffect(() => {
+    if (appliedCard === null) {
+      return
+    }
+    if (appliedCard.status === APPLY_STATUS.COMPLETE) {
+      open({
+        title: '이미 발급이 완료된 카드입니다.',
+        onButtonClick: () => {
+          window.history.back()
+        },
+      })
+
+      return
+    }
+    setReadyToPoll(true)
+  }, [appliedCard])
 
   const { data } = usePollApplyStatus({
     enabled: readyToPoll,
@@ -59,6 +86,10 @@ export default function ApplyPage() {
       window.history.back()
     },
   })
+
+  if (appliedCard !== null && appliedCard.status === APPLY_STATUS.COMPLETE) {
+    return null
+  }
 
   if (readyToPoll || status === 'pending') {
     return <div>Loading...</div>
