@@ -7,7 +7,7 @@ export interface Term {
   title: string
 }
 
-const APPLY_STATUS = {
+export const APPLY_STATUS = {
   READY: 'READY',
   PROGRESS: 'PROGRESS',
   COMPLETE: 'COMPLETE',
