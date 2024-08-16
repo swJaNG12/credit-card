@@ -7,6 +7,13 @@ export interface Term {
   title: string
 }
 
+const APPLY_STATUS = {
+  READY: 'READY',
+  PROGRESS: 'PROGRESS',
+  COMPLETE: 'COMPLETE',
+  REJECT: 'REJECT',
+}
+
 // 전체 데이터 인터페이스
 export interface ApplyValues {
   userId: User['uid']
@@ -19,6 +26,7 @@ export interface ApplyValues {
   isMaster: boolean
   isHipass: boolean
   isRf: boolean
+  status: keyof typeof APPLY_STATUS
 }
 
 export interface Option {
