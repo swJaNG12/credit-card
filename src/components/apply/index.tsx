@@ -18,55 +18,69 @@ export default function Apply({
   const user = useUser()
   const { id } = useParams()
 
-  const [step, setStep] = useState<number>(0)
+  // 로컬스토리지의 stpe을 저장할 때 사용하는 key
+  const storageKey = `applied-${user?.uid}-${id}`
 
-  const [applyValues, setApplyValues] = useState<Partial<ApplyValues>>({
-    userId: user?.uid,
-    cardId: id,
+  const [applyValues, setApplyValues] = useState<Partial<ApplyValues>>(() => {
+    const applied = localStorage.getItem(storageKey)
+
+    const defaultValue = {
+      userId: user?.uid,
+      cardId: id,
+      step: 0,
+    }
+
+    if (applied === null) {
+      return defaultValue
+    }
+
+    return JSON.parse(applied)
   })
 
   useEffect(() => {
-    if (step === 3) {
+    if (applyValues.step === 3) {
+      localStorage.removeItem(storageKey)
+
       onSubmit({
         ...applyValues,
         appliedAt: new Date(),
         status: APPLY_STATUS.READY,
       } as ApplyValues)
+    } else {
+      console.log('저장', applyValues)
+      localStorage.setItem(storageKey, JSON.stringify(applyValues))
     }
-  }, [step, onSubmit, applyValues])
+  }, [onSubmit, applyValues, storageKey])
 
   const handleTermsChange = (terms: Terms) => {
     setApplyValues((prevValues) => ({
       ...prevValues,
       terms,
+      step: (prevValues.step as number) + 1,
     }))
-
-    setStep((prevStep) => prevStep + 1)
   }
   const handleBasicInfoChage = (basicInfoValues: BasicInfoValues) => {
     setApplyValues((prevValues) => ({
       ...prevValues,
       ...basicInfoValues,
+      step: (prevValues.step as number) + 1,
     }))
-
-    setStep((prevStep) => prevStep + 1)
   }
   const handleCardInfoChange = (cardInfo: CardInfoValues) => {
-    setApplyValues((prevalues) => ({
-      ...prevalues,
+    setApplyValues((prevValues) => ({
+      ...prevValues,
       ...cardInfo,
+      step: (prevValues.step as number) + 1,
     }))
-
-    setStep((prevStep) => prevStep + 1)
   }
 
-  console.log(applyValues)
+  console.log('applyValues', applyValues)
 
   return (
     <div>
-      {step === 0 && <Terms onNext={handleTermsChange} />}
-      {step === 1 && <BasicInfo onNext={handleBasicInfoChage} />}
-      {step === 2 && <CardInfo onNext={handleCardInfoChange} />}
+      {applyValues.step === 0 && <Terms onNext={handleTermsChange} />}
+      {applyValues.step === 1 && <BasicInfo onNext={handleBasicInfoChage} />}
+      {applyValues.step === 2 && <CardInfo onNext={handleCardInfoChange} />}
     </div>
   )
 }
