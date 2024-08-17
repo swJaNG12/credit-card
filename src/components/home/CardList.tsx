@@ -4,7 +4,7 @@ import Badge from '@shared/Badge'
 import { useNavigate } from 'react-router-dom'
 
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
-import { flatten } from 'lodash'
+import flatten from 'lodash.flatten'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 export default function CardList() {
