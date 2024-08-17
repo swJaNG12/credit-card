@@ -8,6 +8,7 @@ import SignUpPage from '@pages/SignUp'
 import SignInPage from '@pages/SignIn'
 import ApplyPage from '@pages/Apply'
 import ApplyDone from '@pages/ApplyDone'
+import MyPage from '@pages/My'
 
 import PrivateRoute from '@components/auth/PrivateRoute'
 import { Suspense } from 'react'
@@ -37,6 +38,14 @@ function App() {
           element={
             <PrivateRoute>
               <ApplyDone />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my"
+          element={
+            <PrivateRoute>
+              <MyPage />
             </PrivateRoute>
           }
         />

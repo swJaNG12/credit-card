@@ -8,12 +8,13 @@ import Flex from './Flex'
 import { Link, useLocation } from 'react-router-dom'
 import { useCallback } from 'react'
 import { signOut } from 'firebase/auth'
+import MyImage from '@components/my/MyImage'
 
 export default function Navbar() {
   const location = useLocation()
   const user = useUser()
 
-  console.log(user)
+  // console.log(user)
 
   const showSignButton = !['/signin', '/signup'].includes(location.pathname)
 
@@ -30,7 +31,7 @@ export default function Navbar() {
           </Link>
         )
       } else {
-        return <Button onClick={handleLogout}>로그아웃</Button>
+        return <MyImage />
       }
     }
 
