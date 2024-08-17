@@ -8,6 +8,7 @@ import useAppliedCard from '@components/apply/hooks/useAppliedCard'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAlertContext } from '@/contexts/Alertcontext'
+import FullPageLoader from '@components/shared/FullPageLoader'
 
 export default function ApplyPage() {
   const user = useUser()
@@ -92,7 +93,7 @@ export default function ApplyPage() {
   }
 
   if (readyToPoll || status === 'pending') {
-    return <div>Loading...</div>
+    return <FullPageLoader messgae="카드를 신청중입니다." />
   }
 
   return <Apply onSubmit={mutate} />
