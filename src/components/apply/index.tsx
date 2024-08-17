@@ -5,6 +5,7 @@ import BasicInfo from '@components/apply/BasicInfo'
 import CardInfo from '@components/apply/CardInfo'
 import { ApplyValues, APPLY_STATUS } from '@models/apply'
 import useUser from '@hooks/auth/useUser'
+import ProgressBar from '@shared/progressBar'
 
 type BasicInfoValues = Pick<ApplyValues, 'salary' | 'creditScore' | 'payDate'>
 type Terms = ApplyValues['terms']
@@ -78,6 +79,7 @@ export default function Apply({
 
   return (
     <div>
+      <ProgressBar progress={(applyValues.step as number) / 3} />
       {applyValues.step === 0 && <Terms onNext={handleTermsChange} />}
       {applyValues.step === 1 && <BasicInfo onNext={handleBasicInfoChage} />}
       {applyValues.step === 2 && <CardInfo onNext={handleCardInfoChange} />}
