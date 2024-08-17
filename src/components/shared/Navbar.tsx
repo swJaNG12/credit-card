@@ -31,7 +31,11 @@ export default function Navbar() {
           </Link>
         )
       } else {
-        return <MyImage />
+        return (
+          <Link to="/my">
+            <MyImage />
+          </Link>
+        )
       }
     }
 
