@@ -16,12 +16,14 @@ export default function AdBanners() {
     queryFn: getAdBanners,
   })
 
+  console.log(adBanners)
+
   return (
     <Container>
       <Swiper spaceBetween={8}>
         {adBanners?.map((banner) => (
           <SwiperSlide key={banner.id}>
-            <Link to={banner.link}>
+            <Link to={'/'}>
               <Flex direction="column" css={bannerContainerStyle}>
                 <Text bold={true}>{banner.title}</Text>
                 <Text typography="t7">{banner.description}</Text>
